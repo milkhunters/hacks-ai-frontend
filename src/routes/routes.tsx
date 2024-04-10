@@ -1,12 +1,17 @@
 import { MainLayout } from '@/components/layouts/main-layout';
 import { AuthRoutes } from '@/modules/auth';
+import { MuseumItemsRoutes } from '@/modules/items/routes';
 import { Landing, NotFound } from '@/modules/misc';
 import { UsersRoutes } from '@/modules/users';
 
 export const commonRoutes = [
 	{
 		path: '/',
-		element: <Landing />,
+		element: <MainLayout />,
+		children: [
+			{ path: '/', element: <Landing /> },
+			{ path: '/items', element: <MuseumItemsRoutes /> },
+		],
 	},
 	{
 		path: '*',
