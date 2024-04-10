@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -15,6 +15,8 @@ import { Button } from '../ui/button';
 import { MainLogo } from './logo';
 
 const UserNav = () => {
+	const navigate = useNavigate();
+
 	return (
 		<>
 			<DropdownMenu>
@@ -37,7 +39,7 @@ const UserNav = () => {
 					</DropdownMenuLabel>
 					<DropdownMenuSeparator />
 					<DropdownMenuGroup>
-						<DropdownMenuItem>
+						<DropdownMenuItem onClick={() => navigate('/app/users/aibryx')}>
 							Профиль
 							<DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
 						</DropdownMenuItem>
