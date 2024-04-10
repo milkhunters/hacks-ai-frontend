@@ -1,1 +1,1 @@
-# React Starter from aibryx
+# frontend app for hacks-ai
