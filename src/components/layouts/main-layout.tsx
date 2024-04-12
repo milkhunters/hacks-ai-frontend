@@ -26,12 +26,11 @@ const UserNav = ({ user, isLoading }: { user: UserResponse | null, isLoading: bo
 
 		if (error) toast.error(error.content);
 		
-		console.log(123)
 		window.location.reload();
 
 	};
 
-	if (isLoading) return <Spinner />;
+	if (isLoading) return null;
 
 	return (
 		<>
@@ -80,7 +79,7 @@ const UserNav = ({ user, isLoading }: { user: UserResponse | null, isLoading: bo
 
 const MainNav = ({ user, isLoading }: { user: boolean, isLoading: boolean }) => {
 
-	if (isLoading) return <Spinner />
+	if (isLoading) return null;
 
 	return (
 		<nav className='hidden md:flex items-center space-x-6 lg:space-x-6 mx-6'>
