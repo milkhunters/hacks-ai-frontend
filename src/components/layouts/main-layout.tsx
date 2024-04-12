@@ -17,19 +17,18 @@ import { getCurrentUser } from '@/modules/users/api/users';
 import { signOut } from '@/modules/auth/api/auth';
 import { toast } from 'sonner';
 
-const UserNav = ({ user, isLoading }: { user: UserResponse | null, isLoading: boolean }) => {
+const UserNav = ({ user }: { user: UserResponse | null }) => {
 	const navigate = useNavigate();
 
 	const tryLogout = async () => {
 		const { error } = await signOut();
 
 		if (error) toast.error(error.content);
-		
+
 		window.location.reload();
 
 	};
 
-	if (isLoading) return null;
 
 	return (
 		<>
@@ -76,9 +75,7 @@ const UserNav = ({ user, isLoading }: { user: UserResponse | null, isLoading: bo
 	);
 };
 
-const MainNav = ({ user, isLoading }: { user: boolean, isLoading: boolean }) => {
-
-	if (isLoading) return null;
+const MainNav = ({ user }: { user: boolean }) => {
 
 	return (
 		<nav className='hidden md:flex items-center space-x-6 lg:space-x-6 mx-6'>
@@ -111,13 +108,10 @@ const MainNav = ({ user, isLoading }: { user: boolean, isLoading: boolean }) => 
 
 export const MainLayout = () => {
 	const [user, setUser] = useState<UserResponse | null>(null);
-	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	useEffect(() => {
 		const getAndSetCurrentUser = async () => {
-			setIsLoading(true)
 			const response = await getCurrentUser();
-			setIsLoading(false);
 			console.log(response);
 			if (response.content) setUser(response.content)
 		};
@@ -130,9 +124,9 @@ export const MainLayout = () => {
 			<header className='border-b'>
 				<div className='flex h-16 items-center'>
 					<MainLogo classnames='mx-6' />
-					<MainNav user={!!user} isLoading={isLoading} />
+					<MainNav user={!!user} />
 					<div className='ml-auto flex items-center space-x-4 mx-6'>
-						<UserNav user={user} isLoading={isLoading} />
+						<UserNav user={user} />
 					</div>
 				</div>
 			</header>
