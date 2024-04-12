@@ -10,16 +10,37 @@ import {
 } from 'lucide-react';
 
 import { MuseumItems } from '@/modules/museum/pages/museum-items';
+import { useEffect, useState } from 'react';
+import { UserResponse } from '../types/response';
+import { getCurrentUser } from '../api/users';
+import { useNavigate } from 'react-router-dom';
 
 export const UserCard = () => {
+	const navigate = useNavigate();
+	const [user, setUser] = useState<UserResponse | null>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	// const { id } = useParams();
+	useEffect(() => {
+		const getAndSetCurrentUser = async () => {
+			setIsLoading(true)
+			const response = await getCurrentUser();
+			setIsLoading(false);
+			console.log(response);
+			if (response.content) setUser(response.content)
+		};
+
+		getAndSetCurrentUser();
+	}, []);
+
+	if (isLoading) return <span className='mr-2 h-4 w-4 animate-spin' />
+	if (!isLoading && !user) navigate('/');
 
 	return (
 		<>
 			<Tabs defaultValue='account' className='w-full mt-4'>
 				<TabsList>
 					<TabsTrigger value='account'>Профиль</TabsTrigger>
+					<TabsTrigger value='loaded'>Загруженное</TabsTrigger>
 				</TabsList>
 				<TabsContent value='account'>
 					<div className='w-full space-y-18'>
@@ -32,27 +53,27 @@ export const UserCard = () => {
 											alt='@shadcn'
 										/>
 										<AvatarFallback className='border-2 bg-white'>
-											TA
+											{user?.first_name} {user?.last_name}
 										</AvatarFallback>
 									</Avatar>
 									<div className='space-y-1.5'>
 										<div className='flex items-center space-x-2'>
-											<h1 className='text-2xl font-bold'>Иван Петров</h1>
-											<Badge>Admin</Badge>
+											<h1 className='text-2xl font-bold'>{user?.first_name} {user?.last_name}</h1>
+											<Badge>{user?.role.title}</Badge>
 										</div>
 										<p className='text-gray-500 dark:text-gray-400'>
-											Работник музея
+											{user?.role.title.toLocaleLowerCase() === 'admin' ? 'Администратор музея' : 'Работник музея'}
 										</p>
 									</div>
 								</div>
 								<div className='space-y-2 text-sm'>
 									<div className='flex items-center space-x-2'>
 										<UserIcon className='w-4 h-4 flex-shrink-0' />
-										<span>Joined on June 3, 2018</span>
+										<span>Работает с {user?.created_at.slice(0, 10)}</span>
 									</div>
 									<div className='flex items-center space-x-2'>
 										<MailIcon className='w-4 h-4 flex-shrink-0' />
-										<span>alice@example.com</span>
+										<span>{user?.email}</span>
 									</div>
 									<div className='flex items-center space-x-2'>
 										<PhoneIcon className='w-4 h-4 flex-shrink-0' />
@@ -65,10 +86,11 @@ export const UserCard = () => {
 								</div>
 							</div>
 						</div>
-
-						<div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-16'>
-							<MuseumItems />
-						</div>
+					</div>
+				</TabsContent>
+				<TabsContent value='loaded'>
+					<div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-16'>
+						<MuseumItems />
 					</div>
 				</TabsContent>
 			</Tabs>

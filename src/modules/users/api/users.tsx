@@ -1,8 +1,10 @@
-export const getCurrentUser = async () => {
-	return { name: 'me' };
-};
+import { makeReadRequest } from "@/lib/api";
+import { BaseResponse } from "@/types/response";
+import { UserResponse } from "../types/response";
 
-export const getUserById = async (id: string) => {
-	return { name: 'userById=' + id };
+const USER_API_URL = 'ums/user'
+
+export const getCurrentUser = async (): Promise<BaseResponse<UserResponse>> => {
+	return makeReadRequest(USER_API_URL);
 };
 

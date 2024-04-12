@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'https://test.milkhunters.ru/api/';
+export const API_BASE_URL = 'https://hack.milkhunters.ru/api';
 
 const makeRequest = async (
 	url: string | URL,
@@ -49,6 +49,6 @@ export const makeReadRequest = async (
 	record?: Record<string, string>,
 ) => {
 	const url = record ? buildUrl(apiUrl, record) : apiUrl;
-	const res = await makeRequest(url, 'GET');
+	const res = await makeRequest(`${API_BASE_URL}/${url}`, 'GET');
 	return await res.json();
 };
