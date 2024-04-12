@@ -16,7 +16,6 @@ import { UserResponse } from '@/modules/users/types/response';
 import { getCurrentUser } from '@/modules/users/api/users';
 import { signOut } from '@/modules/auth/api/auth';
 import { toast } from 'sonner';
-import { Spinner } from './spinner';
 
 const UserNav = ({ user, isLoading }: { user: UserResponse | null, isLoading: boolean }) => {
 	const navigate = useNavigate();
