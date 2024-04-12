@@ -1,26 +1,14 @@
-import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import {
-	CardTitle,
-	CardHeader,
-	CardContent,
-	Card,
-	CardDescription,
-} from '@/components/ui/card';
+
 import {
 	MailIcon,
 	MapPinIcon,
-	MoonIcon,
 	PhoneIcon,
-	SunIcon,
 	UserIcon,
 } from 'lucide-react';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox';
+
 import { MuseumItems } from '@/modules/museum/pages/museum-items';
 
 export const UserCard = () => {
@@ -78,7 +66,6 @@ export const UserCard = () => {
 							</div>
 						</div>
 
-						
 						<div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-16'>
 							<MuseumItems />
 						</div>
