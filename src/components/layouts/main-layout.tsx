@@ -67,25 +67,19 @@ const MainNav = () => {
 	return (
 		<nav className='hidden md:flex items-center space-x-6 lg:space-x-6 mx-6'>
 			<Link
-				to='/examples/dashboard'
+				to='/'
 				className='text-sm font-medium transition-colors hover:text-primary'
 			>
 				Обзор
 			</Link>
 			<Link
-				to='/examples/dashboard'
+				to='/museum/my'
 				className='text-sm font-medium text-muted-foreground transition-colors hover:text-primary'
 			>
-				Клиенты
+				Мой музей
 			</Link>
 			<Link
-				to='/examples/dashboard'
-				className='text-sm font-medium text-muted-foreground transition-colors hover:text-primary'
-			>
-				Продукты
-			</Link>
-			<Link
-				to='/examples/dashboard'
+				to='/app/users/setting'
 				className='text-sm font-medium text-muted-foreground transition-colors hover:text-primary'
 			>
 				Настройки

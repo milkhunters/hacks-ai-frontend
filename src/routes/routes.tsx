@@ -1,6 +1,6 @@
 import { MainLayout } from '@/components/layouts/main-layout';
 import { AuthRoutes } from '@/modules/auth';
-import { MuseumItemsRoutes } from '@/modules/items/routes';
+import { MuseumItemsRoutes } from '@/modules/museum/routes';
 import { Landing, NotFound } from '@/modules/misc';
 import { UsersRoutes } from '@/modules/users';
 
@@ -10,7 +10,7 @@ export const commonRoutes = [
 		element: <MainLayout />,
 		children: [
 			{ path: '/', element: <Landing /> },
-			{ path: '/items', element: <MuseumItemsRoutes /> },
+			{ path: '/museum/*', element: <MuseumItemsRoutes /> },
 		],
 	},
 	{
