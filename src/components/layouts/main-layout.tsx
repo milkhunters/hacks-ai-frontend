@@ -7,7 +7,6 @@ import {
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
-	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
@@ -41,21 +40,11 @@ const UserNav = () => {
 					<DropdownMenuGroup>
 						<DropdownMenuItem onClick={() => navigate('/app/users/aibryx')}>
 							Профиль
-							<DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-						</DropdownMenuItem>
-						<DropdownMenuItem>
-							История
-							<DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-						</DropdownMenuItem>
-						<DropdownMenuItem>
-							Настройки
-							<DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
 						</DropdownMenuItem>
 					</DropdownMenuGroup>
 					<DropdownMenuSeparator />
 					<DropdownMenuItem>
 						Выйти
-						<DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
 					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
@@ -79,10 +68,10 @@ const MainNav = () => {
 				Мой музей
 			</Link>
 			<Link
-				to='/app/users/setting'
+				to='/app/users/aibryx'
 				className='text-sm font-medium text-muted-foreground transition-colors hover:text-primary'
 			>
-				Настройки
+				Профиль
 			</Link>
 		</nav>
 	);

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 type MuseumCardProps = {
 	item: MuseumCard
 }
+
 export const MuseumItem = ({item}: MuseumCardProps) => {
 	return <Card>
 	<div className='aspect-[4/3]'>

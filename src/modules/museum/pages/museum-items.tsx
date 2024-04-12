@@ -88,10 +88,12 @@ export const MuseumItems = () => {
 		},
 	];
 	return <>
-	{ITEMS.map((item, index) => {
-					return (
-						<MuseumItem item={item} key={index}/>
-					);
-				})}
+		{
+			ITEMS.map((item, index) => {
+						return (
+							<MuseumItem item={item} key={index}/>
+						);
+			})
+		}
 	</>;
 };
