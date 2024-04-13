@@ -17,6 +17,7 @@ export const MuseumItems = () => {
 					title: 'Металл',
 				},
 			],
+			modelUrl: '/src/assets/adamHead.json'
 		},
 		{
 			title: "Скульптура 'Свобода'",
@@ -33,6 +34,8 @@ export const MuseumItems = () => {
 					title: 'Мрамор',
 				},
 			],
+			modelUrl: '/src/assets/Box.json'
+
 		},
 		{
 			title: 'Крепость Маркиза де Сада',
@@ -46,6 +49,7 @@ export const MuseumItems = () => {
 					title: 'Маркиз',
 				},
 			],
+			modelUrl: '/src/assets/adamHead.json'
 		},
 		{
 			title: 'Картина "Цветы"',
@@ -59,6 +63,7 @@ export const MuseumItems = () => {
 					title: 'Цветы',
 				},
 			],
+			modelUrl: '/src/assets/adamHead.json'
 		},
 		{
 			title: 'Картина "Портрет девушки"',
@@ -72,6 +77,7 @@ export const MuseumItems = () => {
 					title: 'Портрет',
 				},
 			],
+			modelUrl: '/src/assets/adamHead.json'
 		},
 		{
 			title: 'Картина "Живопись в стиле абстракционизма"',
@@ -85,15 +91,14 @@ export const MuseumItems = () => {
 					title: 'Абстракция',
 				},
 			],
+			modelUrl: '/src/assets/adamHead.json'
 		},
 	];
 	return <>
-		{
-			ITEMS.map((item, index) => {
-						return (
-							<MuseumItem item={item} key={index}/>
-						);
-			})
-		}
+		{ITEMS.map((item, index) => {
+			return (
+				<MuseumItem item={item} key={index} />
+			);
+		})}
 	</>;
 };
