@@ -17,7 +17,7 @@ export const MuseumItems = () => {
 					title: 'Металл',
 				},
 			],
-			modelUrl: '/src/assets/adamHead.json'
+			modelUrl: '/public/assets/adamHead.json'
 		},
 		{
 			title: "Скульптура 'Свобода'",
