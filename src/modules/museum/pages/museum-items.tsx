@@ -17,6 +17,7 @@ export const MuseumItems = () => {
 					title: 'Металл',
 				},
 			],
+			modelUrl: '/src/assets/adamHead.json'
 		},
 		{
 			title: "Скульптура 'Свобода'",
@@ -33,6 +34,8 @@ export const MuseumItems = () => {
 					title: 'Мрамор',
 				},
 			],
+			modelUrl: '/src/assets/Box.json'
+
 		},
 		{
 			title: 'Крепость Маркиза де Сада',
@@ -88,10 +91,10 @@ export const MuseumItems = () => {
 		},
 	];
 	return <>
-	{ITEMS.map((item, index) => {
-					return (
-						<MuseumItem item={item} key={index}/>
-					);
-				})}
+		{ITEMS.map((item, index) => {
+			return (
+				<MuseumItem item={item} key={index} />
+			);
+		})}
 	</>;
 };
