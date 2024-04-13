@@ -1,23 +1,38 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { MuseumCard } from "../types/cards";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MuseumItemModel } from "../components/museum-item-model";
+import { CreatedTask, createTask } from "../api/model";
 
 type MuseumCardProps = {
 	item: MuseumCard
 }
 export const MuseumItem = ({ item }: MuseumCardProps) => {
 	const [isModelOpen, setIsModelOpen] = useState(false);
+	const [taskId, setTaskId] = useState('')
 
 	const handleOpenModel = () => {
-		setIsModelOpen(prev => !prev);
+		setIsModelOpen(prev => {
+			if (!prev) {
+				createTask(item.title)
+					.then((data: Response) => data.json()
+						.then((data: CreatedTask) => {
+							if (data.result) {
+								console.log('taskid: ', data);
+								setTaskId(data.result)
+							}
+						}))
+			}
+			return !prev
+		});
+
 	}
-	
+
 	return (
 		<Card>
 			<div className='aspect-[4/3]'>
-				{isModelOpen ? <MuseumItemModel url={item.modelUrl} /> : <img
+				{isModelOpen ? <MuseumItemModel taskId={taskId} /> : <img
 					alt='Image'
 					className='object-cover'
 					src={item.src}

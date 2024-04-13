@@ -1,8 +1,7 @@
 export const API_MODEL_BASE_URL = "https://api.meshy.ai/v2/text-to-3d"
-const {REACT_APP_API_KEY} = process.env
-
+const REACT_APP_API_KEY = "msy_FxyrrNBlk1GiruNS0TqeBaDxWJm1zfeAiSmI"
 export type CreatedTask = {
-   response: string,
+   result: string,
 }
 
 export type Task = {
@@ -32,13 +31,7 @@ type TextureUrls = {
    base_color: string,
 }
 
-enum Status {
-   SUCCEEDED = "SUCCEEDED",
-   PENDING = "PENDING",
-   IN_PROGRESS = "IN_PROGRESS",
-   FAILED = "FAILED",
-   EXPIRED = "EXPIRED"
-}
+type Status = "SUCCEEDED" | "PENDING" | "IN_PROGRESS" | "FAILED" | "EXPIRED"
 
 export const createTask = async (prompt: string) => await fetch(
    API_MODEL_BASE_URL,
