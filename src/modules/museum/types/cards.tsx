@@ -3,4 +3,5 @@ export type MuseumCard = {
 	src: string,
 	author: string,
 	tags: Array<{title: string}>
+	modelUrl: string,
 };
