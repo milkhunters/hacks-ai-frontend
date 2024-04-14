@@ -61,7 +61,7 @@ export const MyMuseum = () => {
   return <>
     <div className='flex flex-col justify-center items-center gap-8 mt-4'>
       <h3 className="scroll-m-20 border-2 p-6 text-3xl rounded-3xl font-extrabold tracking-tight">
-        Центральный Музей Ростова-на-Дону
+        Мой музей
       </h3>
       <div className='flex w-full max-w-lg items-center space-x-2'>
         <Input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSearch(event.target.value)} value={search} type='text' placeholder='Введите название объекта...' />
