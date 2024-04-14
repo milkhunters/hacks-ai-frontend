@@ -138,11 +138,11 @@ export const MuseumKillerForm = () => {
           </div>
           <div className="grid items-center gap-2 w-1/2">
             <h3 className="text-lg font-bold leading-none dark:text-gray-100">Похожие экспонаты</h3>
-            <div className="grid items-center justify-center grid-cols-2 gap-2 h-[500px] overflow-y-auto">
+            <div className="relative grid items-center justify-center grid-cols-2 gap-2 h-[500px] overflow-y-auto">
               {
                 findedItems.length ? <>
                   <MuseumItems items={findedItems} />
-                </> : isItemsLoading ? <Spinner /> : <h2>Пусто...</h2>
+                </> : isItemsLoading ? <Spinner /> : <div className="absolute left-1/4 opacity-50 flex items-center justify-center" >Пока что здесь ничего нет...<br></br> Загрузите изображение!</div>
               }
             </div>
           </div>
