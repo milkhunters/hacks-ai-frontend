@@ -10,18 +10,16 @@ import { useEffect, useState } from 'react';
 export const Landing = () => {
 	const [items, setItems] = useState<Array<MuseumCard>>([]);
 
-	const [isItemsLoading, setIsItemsLoading] = useState<boolean>(false);
-
 	useEffect(() => {
 		const getAndSetUserItems = async () => {
-			setIsItemsLoading(true)
+
 			const response = await getUserItems();
 			console.log(response);
-			setIsItemsLoading(false);
+
 			if (response.content) {
 				for (let item of response.content) {
 					const { content: findedPoster } = await getItem({ itemId: item.id, fileId: item.poster ?? '' });
-					setItems([...items, {...item, poster: findedPoster?.url ?? 'https://images.unsplash.com/photo-1712839398283-5b5bc134d9dc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D'}])
+					setItems([...items, { ...item, poster: findedPoster?.url ?? 'https://images.unsplash.com/photo-1712839398283-5b5bc134d9dc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D' }])
 				}
 			}
 		}
@@ -41,7 +39,7 @@ export const Landing = () => {
 				</div>
 			</div>
 			<div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-8'>
-				<MuseumItems items={items}/>
+				<MuseumItems items={items} />
 			</div>
 		</>
 	);

@@ -1,7 +1,6 @@
 import { Canvas, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import { OrbitControls } from '@react-three/drei'
-import { Loader2 } from 'lucide-react';
 import { useCreateModel } from '../hooks/useCreateTask';
 import { Loader } from '@/components/ui/loaderProgress';
 import { Suspense } from 'react';

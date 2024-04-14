@@ -23,7 +23,7 @@ export const UserCard = () => {
 	const [items, setItems] = useState<Array<MuseumCard>>([]);
 
 	const [isUserLoading, setIsUserLoading] = useState<boolean>(false);
-	const [isItemsLoading, setIsItemsLoading] = useState<boolean>(false);
+	const [, setIsItemsLoading] = useState<boolean>(false);
 
 	useEffect(() => {
 		const getAndSetCurrentUser = async () => {

@@ -2,7 +2,6 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { MuseumCard } from "../types/cards";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { MuseumItemModel } from "../components/museum-item-model";
 
 type MuseumCardProps = {
 	item: MuseumCard
