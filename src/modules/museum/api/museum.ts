@@ -1,5 +1,5 @@
 import { BaseResponse } from "@/types/response";
-import { MuseumCard } from "../types/cards";
+import { MuseumCard} from "../types/cards";
 import { encodeEmpty, encodeJson, makeReadRequest, makeWriteRequest } from "@/lib/api";
 
 const MUSEUM_API_URL = 'museum/';
@@ -41,13 +41,6 @@ type Content = {
   updated_at: string;
 }
 
-type CreateExhibitCredentials = {
-  title: string;
-  content: string;
-  state: number;
-  tags: Array<string>;
-}
-
 export const getUserItems = async (): Promise<BaseResponse<Array<MuseumCard>>> => {
   return makeReadRequest(MUSEUM_API_URL + 'exhibit', { page: '1', per_page: '10', order_by: 'created_at', state: '0' })
 };
@@ -85,6 +78,3 @@ export const getItem = async ({itemId, fileId}: GetItemCredentials): Promise<Bas
   return makeReadRequest(MUSEUM_API_URL + 'exhibit/files/' + itemId + '/' + fileId, {'download': 'false'})
 };
 
-export const createItem = async (data: CreateExhibitCredentials): Promise<Array<MuseumItem>> => {
-  return makeWriteRequest(MUSEUM_API_URL + 'exhibit', encodeJson(data));
-};
