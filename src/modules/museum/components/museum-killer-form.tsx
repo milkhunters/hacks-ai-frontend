@@ -26,7 +26,7 @@ export const MuseumKillerForm = () => {
   const [isItemsLoading, setIsItemsLoading] = useState<boolean>(false);
 
   const intervalRef = useRef<number>();
-  
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target && event.target.files?.length) {
       const file = event.target.files[0];
@@ -98,8 +98,8 @@ export const MuseumKillerForm = () => {
           <PlusIcon size={20} />
         </Button>
       </DialogTrigger>
-      <DialogContent className="min-w-[1900px] h-[800px]">
-        <div className="flex justify-around w-full gap-6">
+      <DialogContent className="min-w-[1200px] h-[600px] ">
+        <div className="flex justify-around w-full h-full overflow-auto gap-6">
           <div className="grid items-center w-1/2 gap-4">
             <div className="flex items-center gap-2">
               <ImageIcon />

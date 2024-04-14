@@ -9,7 +9,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MuseumKillerForm } from '../components/museum-killer-form';
 import { MuseumCard } from '../types/cards';
-import { getUserItems } from '../api/museum';
+import { getSearchItemsByText, getUserItems } from '../api/museum';
+import { useDebounce } from '../hooks/useDebounce';
 
 export const MyMuseum = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ export const MyMuseum = () => {
   const [user, setUser] = useState<UserResponse | null>(null);
   const [items, setItems] = useState<Array<MuseumCard>>([])
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     const getAndSetCurrentUser = async () => {
@@ -27,20 +29,35 @@ export const MyMuseum = () => {
     };
 
     const getAndSetUserItems = async () => {
-			const response = await getUserItems();
+      const response = await getUserItems();
 
-			if (response.content) {
+      if (response.content) {
         setItems(response.content);
-				//for (let item of response.content) {
-				//	const { content: findedPoster } = await getItem({ itemId: item.id, fileId: item.poster ?? '' });
-				//	setItems([...items, {...item, poster: findedPoster?.url ?? 'https://images.unsplash.com/photo-1712839398283-5b5bc134d9dc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D'}])
-				//}
-			}
-		}
-		getAndSetUserItems();
+        //for (let item of response.content) {
+        //	const { content: findedPoster } = await getItem({ itemId: item.id, fileId: item.poster ?? '' });
+        //	setItems([...items, {...item, poster: findedPoster?.url ?? 'https://images.unsplash.com/photo-1712839398283-5b5bc134d9dc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D'}])
+        //}
+      }
+    }
+    getAndSetUserItems();
 
     getAndSetCurrentUser();
   }, []);
+
+
+  const searchQuery = useDebounce(search, 2000)
+
+  useEffect(() => {
+    if (searchQuery || search.length < 0) {
+      const getSearchItems = async () => {
+        const response = await getSearchItemsByText(searchQuery)
+        if (response.content) {
+          setItems(response.content);
+        }
+      }
+      getSearchItems();
+    }
+  }, [searchQuery])
 
   if (isLoading) return <Spinner />;
   if (!isLoading && !user) navigate('/');
@@ -51,7 +68,7 @@ export const MyMuseum = () => {
         Центральный Музей Ростова-на-Дону
       </h3>
       <div className='flex w-full max-w-lg items-center space-x-2'>
-        <Input type='text' placeholder='Введите название объекта...' />
+        <Input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSearch(event.target.value)} value={search} type='text' placeholder='Введите название объекта...' />
         <Button type='submit'>
           <Search size={20} />
         </Button>
