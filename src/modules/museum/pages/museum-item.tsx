@@ -29,24 +29,8 @@ export const MuseumItem = ({ item }: MuseumCardProps) => {
 
 	const handleOpenModel = () => {
 		setIsModelOpen(prev => {
-			const imageUrl = 'https://storage.milkhunters.ru/hack-sochi/85ac3e9a-8e52-4577-8e06-51d22721b52c/dccd7157-6f9c-4815-ab61-a741c1a0ed03';
-
-			// Создаем ссылку
-			const downloadLink = document.createElement('a');
-			downloadLink.href = imageUrl;
-
-			// Устанавливаем атрибут для загрузки файла и имя файла
-			downloadLink.setAttribute('download', 'image.jpg');
-			// Если вы хотите изменить имя файла на основе URL, вы можете сделать это, например:
-			// downloadLink.setAttribute('download', imageUrl.substring(imageUrl.lastIndexOf('/') + 1));
-
-			// Получаем строковое представление ссылки
-			const downloadLinkString = downloadLink.href;
-			console.log(img)
-
-			console.log(downloadLinkString)
 			if (!prev) {
-				createTask("https://storage.milkhunters.ru/hack-sochi/85ac3e9a-8e52-4577-8e06-51d22721b52c/dccd7157-6f9c-4815-ab61-a741c1a0ed03.jpeg")
+				createTask(img)
 					.then((data: Response) => data.json())
 					.then((data: CreatedTask) => data.result && setTask(data.result))
 			}

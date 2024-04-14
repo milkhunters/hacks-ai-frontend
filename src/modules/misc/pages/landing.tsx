@@ -17,10 +17,6 @@ export const Landing = () => {
 	const [, setFileId] = useState<string>('');
 	const [uploadFile, setUploadFile] = useState<File | null>(null);
 
-	const [title, setTitle] = useState<string>('');
-	const [content, setContent] = useState<string>('')
-	const [tags, setTags] = useState<string>('');
-
 	const [findedItems, setFindedItems] = useState<Array<MuseumCard>>([]);
 	const [isItemsLoading, setIsItemsLoading] = useState<boolean>(false);
 
@@ -104,16 +100,9 @@ export const Landing = () => {
 
 	useEffect(() => {
 		const getAndSetUserItems = async () => {
-
 			const { content } = await getUserItems();
-
-
 			if (content) {
 				setItems(content);
-				//for (let item of response.content) {
-				//	const { content: findedPoster } = await getItem({ itemId: item.id, fileId: item.poster ?? '' });
-				//	setItems([...items, { ...item, poster: findedPoster?.url ?? 'https://images.unsplash.com/photo-1712839398283-5b5bc134d9dc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D' }])
-				//}
 			}
 		}
 		getAndSetUserItems();
