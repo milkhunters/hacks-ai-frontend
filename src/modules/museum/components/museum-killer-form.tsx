@@ -7,8 +7,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Delete, ImageIcon, PlusIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import { getItem, getSearchItems, makeSearchTask, uploadFileOnS3, uploadSearchFileUrl } from "../api/museum";
+import { useEffect, useRef, useState } from "react";
+import { getSearchItems, makeSearchTask, uploadFileOnS3, uploadSearchFileUrl } from "../api/museum";
 import { toast } from "sonner";
 import { MuseumCard } from "../types/cards";
 import { Spinner } from "@/components/layouts/spinner";
@@ -25,6 +25,8 @@ export const MuseumKillerForm = () => {
   const [findedItems, setFindedItems] = useState<Array<MuseumCard>>([]);
   const [isItemsLoading, setIsItemsLoading] = useState<boolean>(false);
 
+  const intervalRef = useRef<number>();
+  
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target && event.target.files?.length) {
       const file = event.target.files[0];
@@ -62,14 +64,15 @@ export const MuseumKillerForm = () => {
         return;
       }
 
-      const id = setInterval(async () => {
+      intervalRef.current = window.setInterval(async () => {
         const { content: finded } = await getSearchItems(content?.file_id);
         if (finded) {
-          for (let item of finded) {
-            const { content: findedPoster } = await getItem({ itemId: item.id, fileId: item.poster });
-            setFindedItems([...findedItems, { ...item, poster: findedPoster?.url ?? '' }])
-          }
-          clearInterval(id)
+          setFindedItems(finded);
+          //for (let item of finded) {
+          //  const { content: findedPoster } = await getItem({ itemId: item.id, fileId: item.poster });
+          //  setFindedItems([...findedItems, { ...item, poster: findedPoster?.url ?? '' }])
+          //}
+          clearInterval(intervalRef.current)
           setIsItemsLoading(false);
         }
       }, 1000)
@@ -77,10 +80,14 @@ export const MuseumKillerForm = () => {
     }
   }
 
+
   useEffect(() => {
     if (uploadFile) makeUploadUrlFile();
 
-    return () => setFindedItems([]);
+    return () => {
+      clearInterval(intervalRef.current)
+      setFindedItems([]);
+    }
 
   }, [uploadFile]);
 

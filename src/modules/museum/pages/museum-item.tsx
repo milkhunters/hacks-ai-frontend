@@ -1,25 +1,42 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { MuseumCard } from "../types/cards";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getItem } from "../api/museum";
+import { Spinner } from "@/components/layouts/spinner";
 
 type MuseumCardProps = {
 	item: MuseumCard
 }
 export const MuseumItem = ({ item }: MuseumCardProps) => {
 	const [isModelOpen, setIsModelOpen] = useState(false);
+	const [img, setImg] = useState<string>('');
+	const [isLoading, setIsLoading] = useState(false);
+
+	const setImgs = async () => {
+		setIsLoading(true);
+		const {content } = await getItem({itemId: item.id, fileId: item.poster});
+		if (content) setImg(content.url)
+		setIsLoading(false);
+	};
+
+	useEffect(() => {
+		setImgs();
+	}, [])
+	
 
 	const handleOpenModel = () => {
 		setIsModelOpen(prev => !prev);
 	}
 	
+	if (isLoading) return <Spinner/>
 	return (
 		<Card>
 			<div className='aspect-[4/3]'>
 				{isModelOpen ? <>123</>: <img
 					alt='Image'
 					className='object-cover'
-					src={item.poster}
+					src={img}
 					style={{
 						aspectRatio: '400/300',
 						objectFit: 'cover',

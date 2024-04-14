@@ -15,7 +15,7 @@ import { UserResponse } from '../types/response';
 import { getCurrentUser } from '../api/users';
 import { useNavigate } from 'react-router-dom';
 import { MuseumCard } from '@/modules/museum/types/cards';
-import { getItem, getUserItems } from '@/modules/museum/api/museum';
+import { getUserItems } from '@/modules/museum/api/museum';
 
 export const UserCard = () => {
 	const navigate = useNavigate();
@@ -39,10 +39,11 @@ export const UserCard = () => {
 			console.log(response);
 			setIsItemsLoading(false);
 			if (response.content) {
-				for (let item of response.content) {
-					const { content: findedPoster } = await getItem({ itemId: item.id, fileId: item.poster ?? '' });
-					setItems([...items, {...item, poster: findedPoster?.url ?? 'https://images.unsplash.com/photo-1712839398283-5b5bc134d9dc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D'}])
-				}
+				setItems(response.content)
+				//for (let item of response.content) {
+				//	const { content: findedPoster } = await getItem({ itemId: item.id, fileId: item.poster ?? '' });
+				//	setItems([...items, {...item, poster: findedPoster?.url ?? 'https://images.unsplash.com/photo-1712839398283-5b5bc134d9dc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D'}])
+				//}
 			}
 		}
 

@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { getItem, getUserItems } from '@/modules/museum/api/museum';
+import { getUserItems } from '@/modules/museum/api/museum';
 import { MuseumItems } from '@/modules/museum/pages/museum-items';
 import { MuseumCard } from '@/modules/museum/types/cards';
 import { Search } from 'lucide-react';
@@ -13,14 +13,15 @@ export const Landing = () => {
 	useEffect(() => {
 		const getAndSetUserItems = async () => {
 
-			const response = await getUserItems();
-			console.log(response);
+			const {content} = await getUserItems();
+	
 
-			if (response.content) {
-				for (let item of response.content) {
-					const { content: findedPoster } = await getItem({ itemId: item.id, fileId: item.poster ?? '' });
-					setItems([...items, { ...item, poster: findedPoster?.url ?? 'https://images.unsplash.com/photo-1712839398283-5b5bc134d9dc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D' }])
-				}
+			if (content) {
+				setItems(content);
+				//for (let item of response.content) {
+				//	const { content: findedPoster } = await getItem({ itemId: item.id, fileId: item.poster ?? '' });
+				//	setItems([...items, { ...item, poster: findedPoster?.url ?? 'https://images.unsplash.com/photo-1712839398283-5b5bc134d9dc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D' }])
+				//}
 			}
 		}
 		getAndSetUserItems();
