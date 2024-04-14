@@ -8,7 +8,6 @@ type MuseumCardProps = {
 	item: MuseumCard
 }
 export const MuseumItem = ({ item }: MuseumCardProps) => {
-	console.log(item)
 	const [isModelOpen, setIsModelOpen] = useState(false);
 
 	const handleOpenModel = () => {
@@ -18,7 +17,7 @@ export const MuseumItem = ({ item }: MuseumCardProps) => {
 	return (
 		<Card>
 			<div className='aspect-[4/3]'>
-				{isModelOpen ? <MuseumItemModel url={item.poster} /> : <img
+				{isModelOpen ? <>123</>: <img
 					alt='Image'
 					className='object-cover'
 					src={item.poster}
