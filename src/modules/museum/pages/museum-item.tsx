@@ -15,7 +15,7 @@ export const MuseumItem = ({ item }: MuseumCardProps) => {
 	const handleOpenModel = () => {
 		setIsModelOpen(prev => {
 			if (!prev) {
-				createTask(item.title)
+				createTask(item.src)
 					.then((data: Response) => data.json()
 						.then((data: CreatedTask) => {
 							if (data.result) {

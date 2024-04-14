@@ -4,7 +4,7 @@ export const MuseumItems = () => {
 	const ITEMS = [
 		{
 			title: 'Скульптура ',
-			src: 'https://images.unsplash.com/photo-1614016103260-b9d2628369bf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fCVEMCVCOCVEMSU4MSVEMCVCQSVEMSU4MyVEMSU4MSVEMSU4MSVEMSU4MiVEMCVCMiVEMCVCRXxlbnwwfHwwfHx8MA%3D%3D',
+			src: 'https://www.i2img.com/download/url-to-image_en_3_198_1129641536661b147e45e841.22348324/url2img_661b14a023cf3.jpeg?81',
 			author: 'Sarah J. Maas',
 			tags: [
 				{
@@ -20,7 +20,7 @@ export const MuseumItems = () => {
 		},
 		{
 			title: "Скульптура 'Свобода'",
-			src: 'https://images.unsplash.com/photo-1645523736056-50d602dbee7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8JUQwJUJDJUQxJTgzJUQwJUI3JUQwJUI1JUQwJUI5fGVufDB8fDB8fHww',
+			src: 'https://www.i2img.com/download/url-to-image_en_3_198_1278039845661b161f94a6a3.47558535/url2img_661b1621bafd3.jpeg?401',
 			author: 'Sarah J. Maas',
 			tags: [
 				{
@@ -36,7 +36,7 @@ export const MuseumItems = () => {
 		},
 		{
 			title: 'Крепость Маркиза де Сада',
-			src: 'https://images.unsplash.com/photo-1711747707558-51259ce94c43?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8JUQwJUJDJUQxJTgzJUQwJUI3JUQwJUI1JUQwJUI5fGVufDB8fDB8fHww',
+			src: 'https://www.i2img.com/download/url-to-image_en_3_198_1479404738661b190c86e657.78296165/url2img_661b190dc82a8.jpeg?140',
 			author: 'Sarah J. Maas',
 			tags: [
 				{
@@ -48,15 +48,15 @@ export const MuseumItems = () => {
 			],
 		},
 		{
-			title: 'Картина "Цветы"',
-			src: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXJ0fGVufDB8fDB8fHww',
+			title: 'Яблоко Адама',
+			src: 'https://i1.u-mama.ru/3e3/98e/8b0/ee61cba6b5a1aaab3e20bcf312726b9c.jpg',
 			author: 'Sarah J. Maas',
 			tags: [
 				{
-					title: 'Картина',
+					title: 'Яблоко',
 				},
 				{
-					title: 'Цветы',
+					title: 'Адам',
 				},
 			],
 		},
@@ -75,7 +75,7 @@ export const MuseumItems = () => {
 		},
 		{
 			title: 'Картина "Живопись в стиле абстракционизма"',
-			src: 'https://plus.unsplash.com/premium_photo-1672287578303-a9832c84a2a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGFydHxlbnwwfHwwfHx8MA%3D%3D',
+			src: 'https://www.i2img.com/download/url-to-image_en_3_198_1412721347661b1a760b3545.30193683/url2img_661b1a7829a3f.jpeg?113',
 			author: 'Sarah J. Maas',
 			tags: [
 				{

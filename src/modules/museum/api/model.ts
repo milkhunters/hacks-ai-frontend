@@ -1,5 +1,5 @@
-export const API_MODEL_BASE_URL = "https://api.meshy.ai/v2/text-to-3d"
-const REACT_APP_API_KEY = "msy_FxyrrNBlk1GiruNS0TqeBaDxWJm1zfeAiSmI"
+export const API_MODEL_BASE_URL = "https://api.meshy.ai/v1/image-to-3d"
+const REACT_APP_API_KEY = "msy_ZxiueYXAfbVCEGV4y2yF4wFyCYzeOfF5ojQk"
 export type CreatedTask = {
    result: string,
 }
@@ -33,7 +33,7 @@ type TextureUrls = {
 
 type Status = "SUCCEEDED" | "PENDING" | "IN_PROGRESS" | "FAILED" | "EXPIRED"
 
-export const createTask = async (prompt: string) => await fetch(
+export const createTask = async (image_url: string) => await fetch(
    API_MODEL_BASE_URL,
    {
       method: 'POST',
@@ -42,8 +42,8 @@ export const createTask = async (prompt: string) => await fetch(
          'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-         prompt,
-         mode: 'preview'
+         image_url,
+         enable_pbr: true
       })
    },
 )

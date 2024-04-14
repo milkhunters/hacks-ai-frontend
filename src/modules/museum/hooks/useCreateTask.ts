@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Task, getTaskData } from "../api/model"
 
 export const useCreateModel = (taskId: string) => {
-   
+
    const [status, setStatus] = useState('')
    const [url, setUrl] = useState('');
+   const [progress, setProgress] = useState(0)
 
    useEffect(() => {
       if (taskId.length > 0 && status !== 'SUCCEEDED' && status !== 'FAILED') {
@@ -14,6 +15,7 @@ export const useCreateModel = (taskId: string) => {
                   .then((data: Task) => {
                      console.log('responce: ', data)
                      setStatus(data.status)
+                     setProgress(data.progress)
                      if (data.status === "SUCCEEDED") {
                         setUrl(data.model_urls.glb);
                      }
@@ -27,6 +29,6 @@ export const useCreateModel = (taskId: string) => {
    }, [taskId])
 
    return {
-      status, url
+      status, url, progress
    }
 }
