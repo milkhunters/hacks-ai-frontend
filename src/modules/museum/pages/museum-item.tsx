@@ -8,6 +8,7 @@ type MuseumCardProps = {
 	item: MuseumCard
 }
 export const MuseumItem = ({ item }: MuseumCardProps) => {
+	console.log(item)
 	const [isModelOpen, setIsModelOpen] = useState(false);
 
 	const handleOpenModel = () => {
@@ -17,10 +18,10 @@ export const MuseumItem = ({ item }: MuseumCardProps) => {
 	return (
 		<Card>
 			<div className='aspect-[4/3]'>
-				{isModelOpen ? <MuseumItemModel url={item.modelUrl} /> : <img
+				{isModelOpen ? <MuseumItemModel url={item.poster} /> : <img
 					alt='Image'
 					className='object-cover'
-					src={item.src}
+					src={item.poster}
 					style={{
 						aspectRatio: '400/300',
 						objectFit: 'cover',
@@ -33,7 +34,7 @@ export const MuseumItem = ({ item }: MuseumCardProps) => {
 					<h3 className='text-sm font-semibold leading-none'>
 						{item.title}
 					</h3>
-					<p className='text-sm text-gray-500'>by {item.author}</p>
+					<p className='text-sm text-gray-500'>by {item.owner_id}</p>
 				</div>
 			</CardContent>
 			<CardFooter className='flex justify-center flex-col gap-3 relative'>

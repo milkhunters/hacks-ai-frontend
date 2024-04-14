@@ -1,6 +1,7 @@
+import { MuseumCard } from "../types/cards";
 import { MuseumItem } from "./museum-item";
 
-export const MuseumItems = () => {
+export const MuseumItems = ({items}: {items: Array<MuseumCard> | null}) => {
 	const ITEMS = [
 		{
 			title: 'Скульптура ',
@@ -95,10 +96,10 @@ export const MuseumItems = () => {
 		},
 	];
 	return <>
-		{ITEMS.map((item, index) => {
+		{items?.length ? items.map((item, index) => {
 			return (
 				<MuseumItem item={item} key={index} />
 			);
-		})}
+		}): <h1 className="text-3xl">Вы еще ничего не загрузили...</h1>}
 	</>;
 };
