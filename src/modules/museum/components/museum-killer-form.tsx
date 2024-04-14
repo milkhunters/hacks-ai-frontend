@@ -15,7 +15,7 @@ import { Spinner } from "@/components/layouts/spinner";
 import { MuseumItems } from "../pages/museum-items";
 
 export const MuseumKillerForm = () => {
-  const [fileId, setFileId] = useState<string>('');
+  const [, setFileId] = useState<string>('');
   const [uploadFile, setUploadFile] = useState<File | null>(null);
 
   const [title, setTitle] = useState<string>('');

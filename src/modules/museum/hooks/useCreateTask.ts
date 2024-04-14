@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { Task, getTaskData } from "../api/model"
 
 export const useCreateModel = (taskId: string) => {
