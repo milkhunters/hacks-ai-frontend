@@ -67,7 +67,7 @@ export const MuseumKillerForm = () => {
       intervalRef.current = window.setInterval(async () => {
         const { content: finded } = await getSearchItems(content?.file_id);
         if (finded) {
-          setFindedItems(finded);
+          setFindedItems(finded.result);
           //for (let item of finded) {
           //  const { content: findedPoster } = await getItem({ itemId: item.id, fileId: item.poster });
           //  setFindedItems([...findedItems, { ...item, poster: findedPoster?.url ?? '' }])
