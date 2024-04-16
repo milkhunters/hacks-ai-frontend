@@ -140,7 +140,7 @@ export const MuseumKillerForm = () => {
             <h3 className="text-lg font-bold leading-none dark:text-gray-100">Похожие экспонаты</h3>
             <div className="relative grid items-center justify-center grid-cols-2 gap-2 h-[500px] overflow-y-auto">
               {
-                findedItems.result.length ? <>
+                findedItems.length ? <>
                   <MuseumItems items={findedItems} />
                 </> : isItemsLoading ? <Spinner /> : <div className="absolute left-1/4 opacity-50 flex items-center justify-center" >Пока что здесь ничего нет...<br></br> Загрузите изображение!</div>
               }
