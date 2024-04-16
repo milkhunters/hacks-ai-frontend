@@ -61,8 +61,8 @@ export const Landing = () => {
 
 			intervalRef.current = window.setInterval(async () => {
 				const { content: finded } = await getSearchItems(content?.file_id);
-				if (finded) {
-					setFindedItems(finded);
+				if (finded?.result) {
+					setFindedItems(finded.result);
 					clearInterval(intervalRef.current)
 					setIsItemsLoading(false);
 				}
