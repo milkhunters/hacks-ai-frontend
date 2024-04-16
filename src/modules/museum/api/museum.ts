@@ -74,7 +74,7 @@ export const makeSearchTask = async (fileId: string): Promise<BaseResponse<null>
   return makeWriteRequest(MUSEUM_API_URL + 'img_searcher/task/' + fileId, encodeEmpty());
 };
 
-export const getSearchItems = async (fileId: string): Promise<BaseResponse<Array<MuseumCard>>> => {
+export const getSearchItems = async (fileId: string): Promise<BaseResponse<{classif: string, result: Array<MuseumCard>}>> => {
   return makeReadRequest(MUSEUM_API_URL + 'img_searcher/task/' + fileId);
 };
 
