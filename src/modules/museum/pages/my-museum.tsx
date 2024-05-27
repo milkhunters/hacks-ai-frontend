@@ -4,48 +4,75 @@ import { Input } from '@/components/ui/input';
 import { MuseumItems } from '@/modules/museum/pages/museum-items';
 import { getCurrentUser } from '@/modules/users/api/users';
 import { UserResponse } from '@/modules/users/types/response';
-import { PlusIcon, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MuseumKillerForm } from '../components/museum-killer-form';
+import { MuseumCard } from '../types/cards';
+import { getSearchItemsByText, getUserItems } from '../api/museum';
+import { useDebounce } from '../hooks/useDebounce';
 
 export const MyMuseum = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState<UserResponse | null>(null);
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [items, setItems] = useState<Array<MuseumCard>>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [search, setSearch] = useState('')
 
-	useEffect(() => {
-		const getAndSetCurrentUser = async () => {
-			setIsLoading(true)
-			const response = await getCurrentUser();
-			setIsLoading(false);
-			console.log(response);
-			if (response.content) setUser(response.content)
-		};
+  useEffect(() => {
+    const getAndSetCurrentUser = async () => {
+      setIsLoading(true)
+      const response = await getCurrentUser();
+      setIsLoading(false);
+      if (response.content) setUser(response.content)
+    };
 
-		getAndSetCurrentUser();
-	}, []);
+    const getAndSetUserItems = async () => {
+      const response = await getUserItems();
 
-	if (isLoading) return <Spinner/>;
-	if (!isLoading && !user) navigate('/');
+      if (response.content) {
+        setItems(response.content);
+      }
+    }
+    getAndSetUserItems();
+
+    getAndSetCurrentUser();
+  }, []);
+
+
+  const searchQuery = useDebounce(search, 2000)
+
+  useEffect(() => {
+    if (searchQuery || search.length < 0) {
+      const getSearchItems = async () => {
+        const response = await getSearchItemsByText(searchQuery)
+        if (response.content) {
+          setItems(response.content);
+        }
+      }
+      getSearchItems();
+    }
+  }, [searchQuery])
+
+  if (isLoading) return <Spinner />;
+  if (!isLoading && !user) navigate('/');
 
   return <>
     <div className='flex flex-col justify-center items-center gap-8 mt-4'>
       <h3 className="scroll-m-20 border-2 p-6 text-3xl rounded-3xl font-extrabold tracking-tight">
-        Центральный Музей Ростова-на-Дону
+        Мой музей
       </h3>
       <div className='flex w-full max-w-lg items-center space-x-2'>
-        <Input type='text' placeholder='Введите название объекта...' />
+        <Input onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSearch(event.target.value)} value={search} type='text' placeholder='Введите название объекта...' />
         <Button type='submit'>
           <Search size={20} />
         </Button>
-        <Button type='submit'>
-          <PlusIcon size={20} />
-        </Button>
+        <MuseumKillerForm />
       </div>
     </div>
     <div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-8'>
-      <MuseumItems />
+      <MuseumItems items={items} />
     </div>
   </>
 };

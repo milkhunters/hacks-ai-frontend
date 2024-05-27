@@ -33,6 +33,9 @@ export const makeWriteRequest = async (
 	const url = `${API_BASE_URL}/${apiUrl}`;
 	const { headers, body } = options;
 	const res = await makeRequest(url, method, headers, body);
+	if (res.status === 204) {
+    return {content: null, error: null};
+  }
 	return await res.json();
 };
 
@@ -49,6 +52,9 @@ export const makeReadRequest = async (
 	record?: Record<string, string>,
 ) => {
 	const url = record ? buildUrl(apiUrl, record) : apiUrl;
-	const res = await makeRequest(`${API_BASE_URL}/${url}`, 'GET');
+	const res = await makeRequest(record ? url : `${API_BASE_URL}/${url}`, 'GET');
+	if (res.status === 204) {
+    return {content: null, error: null};
+  }
 	return await res.json();
 };

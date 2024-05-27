@@ -14,26 +14,45 @@ import { useEffect, useState } from 'react';
 import { UserResponse } from '../types/response';
 import { getCurrentUser } from '../api/users';
 import { useNavigate } from 'react-router-dom';
+import { MuseumCard } from '@/modules/museum/types/cards';
+import { getUserItems } from '@/modules/museum/api/museum';
 
 export const UserCard = () => {
 	const navigate = useNavigate();
 	const [user, setUser] = useState<UserResponse | null>(null);
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [items, setItems] = useState<Array<MuseumCard>>([]);
+
+	const [isUserLoading, setIsUserLoading] = useState<boolean>(false);
+	const [, setIsItemsLoading] = useState<boolean>(false);
 
 	useEffect(() => {
 		const getAndSetCurrentUser = async () => {
-			setIsLoading(true)
+			setIsUserLoading(true)
 			const response = await getCurrentUser();
-			setIsLoading(false);
-			console.log(response);
+			setIsUserLoading(false);
 			if (response.content) setUser(response.content)
 		};
 
+		const getAndSetUserItems = async () => {
+			setIsItemsLoading(true)
+			const response = await getUserItems();
+			console.log(response);
+			setIsItemsLoading(false);
+			if (response.content) {
+				setItems(response.content)
+				//for (let item of response.content) {
+				//	const { content: findedPoster } = await getItem({ itemId: item.id, fileId: item.poster ?? '' });
+				//	setItems([...items, {...item, poster: findedPoster?.url ?? 'https://images.unsplash.com/photo-1712839398283-5b5bc134d9dc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D'}])
+				//}
+			}
+		}
+
 		getAndSetCurrentUser();
+		getAndSetUserItems();
 	}, []);
 
-	if (isLoading) return <span className='mr-2 h-4 w-4 animate-spin' />
-	if (!isLoading && !user) navigate('/');
+	if (isUserLoading) return <span className='mr-2 h-4 w-4 animate-spin' />
+	if (!isUserLoading && !user) navigate('/');
 
 	return (
 		<>
@@ -90,7 +109,7 @@ export const UserCard = () => {
 				</TabsContent>
 				<TabsContent value='loaded'>
 					<div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-16'>
-						<MuseumItems />
+						<MuseumItems items={items}/>
 					</div>
 				</TabsContent>
 			</Tabs>
